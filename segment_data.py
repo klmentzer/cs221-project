@@ -4,17 +4,18 @@ import random
 
 def make_training_and_validation():
     '''
-    Method to get training and validation data sets. Assumes kaggle data file
-    folder is in the parent directory of cs221-project repository.
-    Takes first 2700 images of each letter for training, and last 300 for
-    verification.
+    Method to get training and validation data sets. Takes first 2700 images of
+    each letter for training, and last 300 for verification.
+
+    @pre Assumes kaggle data file folder is in the parent directory of
+         cs221-project repository.
 
     @return list of training image file paths, list of verification image file paths
     '''
     filename =os.path.join( os.getcwd(), '../asl-alphabet/asl_alphabet_train/')
 
     letter_folders = list(set(os.listdir(filename)))
-    letter_folders = [s for s in letter_folders if s[0]!= '.']
+    letter_folders = [s for s in letter_folders if s[0]!= '.' and s not in ['test','val','train']]
     assert(len(letter_folders)==29)
 
     training_imgs =[]
