@@ -2,6 +2,8 @@ import os
 import re
 import random
 
+TRAINING_SIZE = 2700
+TOTAL_SIZE = 3000
 def make_training_and_validation():
     '''
     Method to get training and validation data sets. Assumes kaggle data file
@@ -19,7 +21,7 @@ def make_training_and_validation():
 
     training_imgs =[]
     for letter in letter_folders:
-        for i in range(1,2701):
+        for i in range(1,TRAINING_SIZE+1):
             path = [os.getcwd(), '../asl-alphabet/asl_alphabet_train/',letter, \
                 "/",letter+str(i)+'.jpg']
             full_path = "".join([str(s) for s in path])
@@ -27,7 +29,7 @@ def make_training_and_validation():
 
     verification_imgs =[]
     for letter in letter_folders:
-        for i in range(2700,3001):
+        for i in range(TRAINING_SIZE,TOTAL_SIZE + 1):
             path = [os.getcwd(), '../asl-alphabet/asl_alphabet_train/',letter, \
                 "/",letter+str(i)+'.jpg']
             full_path = "".join([str(s) for s in path])
