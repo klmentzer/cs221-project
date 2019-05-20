@@ -30,7 +30,7 @@ def make_training_and_validation():
 
     verification_imgs =[]
     for letter in letter_folders:
-        for i in range(TRAINING_SIZE,TOTAL_SIZE + 1):
+        for i in range(TRAINING_SIZE, TOTAL_SIZE + 1):
             path = [os.getcwd(), '../asl-alphabet/asl_alphabet_train/',letter, \
                 "/",letter+str(i)+'.jpg']
             full_path = "".join([str(s) for s in path])
