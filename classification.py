@@ -10,6 +10,8 @@ from keras.layers import Activation, Flatten, Dense, Dropout
 from keras import optimizers
 import os
 
+os.environ['KMP_DUPLICATE_LIB_OK']='True'
+
 parent_dir =os.path.join( os.getcwd(), '../asl-alphabet/asl_alphabet_train/')
 test_dir = parent_dir+"test"
 val_dir = parent_dir+"val"
@@ -60,10 +62,10 @@ validation_generator = test_datagen.flow_from_directory(
         class_mode='categorical')
 print(classifier.summary())
 
-classifier.fit_generator(train_generator, 
-        steps_per_epoch=2000, 
-        epochs=50, 
-        validation_data=validation_generator, 
+classifier.fit_generator(train_generator,
+        steps_per_epoch=2000,
+        epochs=5,
+        validation_data=validation_generator,
         validation_steps=800)
 
 classifier.save_weights('first_try.h5')
