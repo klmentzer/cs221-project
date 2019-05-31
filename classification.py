@@ -15,6 +15,7 @@ import os
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
 
 #with device('/gpu:0'):
+
 parent_dir =os.path.join( os.getcwd(), '../asl-alphabet/asl_alphabet_train/')
 test_dir = parent_dir+"test"
 val_dir = parent_dir+"val"
@@ -71,7 +72,7 @@ print(classifier.summary())
 
 classifier.fit_generator(train_generator,
         steps_per_epoch=2000,
-        epochs=50,
+        epochs=5,
         validation_data=validation_generator,
         validation_steps=800)
 
