@@ -22,7 +22,7 @@ val_dir = parent_dir+"val"
 train_dir = parent_dir+"train"
 
 classifier = create_model(num_classes=29, dropout_prob=0.2, weights=None, include_top=True)#Sequential()
-for layer in classifer.layers[:9*len(classifier.layers)//10]:
+for layer in classifier.layers[:9*len(classifier.layers)//10]:
     layer.trainable = False
 
 print(len(classifier.layers))
@@ -59,13 +59,13 @@ test_datagen = image.ImageDataGenerator(rescale=1./255)
 
 train_generator = train_datagen.flow_from_directory(
         train_dir,
-        target_size=(200,200),
+        target_size=(299,299),
         batch_size=32,
         class_mode="categorical")
 
 validation_generator = test_datagen.flow_from_directory(
         val_dir,
-        target_size=(200,200),
+        target_size=(299,299),
         batch_size=32,
         class_mode='categorical')
 print(classifier.summary())
