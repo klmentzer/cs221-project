@@ -18,7 +18,7 @@ def make_training_and_validation():
 
     letter_folders = list(set(os.listdir(filename)))
     letter_folders = [s for s in letter_folders if s[0]!= '.' and s not in ['test','val','train']]
-    assert(len(letter_folders)==29)
+    #assert(len(letter_folders)==29)
 
     training_imgs =[]
     for letter in letter_folders:
@@ -46,6 +46,6 @@ def get_category_from_filename(filename):
     letter = re.split('\d+', img_name)[0]
     return letter
 
-t,v = make_training_and_validation()
-let = get_category_from_filename(random.choice(t))
-print(let)
+# t,v = make_training_and_validation()
+# let = get_category_from_filename(random.choice(t))
+# print(let)
