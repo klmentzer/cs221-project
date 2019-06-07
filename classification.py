@@ -75,7 +75,7 @@ validation_generator = test_datagen.flow_from_directory(
 # print(classifier.summary())
 
 classifier.fit_generator(train_generator,
-        steps_per_epoch=2000,
+        steps_per_epoch=2000, max_q_size=3, 
         epochs=5,
         validation_data=validation_generator,
         validation_steps=800)
