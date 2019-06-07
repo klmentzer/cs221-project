@@ -91,8 +91,9 @@ class ResNet():
         x = BatchNormalization(axis=chanDim, epsilon=bnEps,
                 momentum=bnMom)(x)
         x = Activation("relu")(x)
-        x = AveragePooling2D((8, 8))(x)
+        x = MaxPooling2D((2, 2))(x)
 
+        print('asdfjkl')
             # softmax classifier
         x = Flatten()(x)
         x = Dense(classes, kernel_regularizer=l2(reg))(x)
