@@ -9,12 +9,13 @@ from keras.layers import Conv2D, MaxPooling2D
 from keras.layers import Activation, Flatten, Dense, Dropout
 from keras import optimizers
 from resnet import ResNet
+import tensorflow as tf
 import sys
 sys.path.insert(0, 'kerasinceptionV4master/inception_v4')
 from kerasinceptionV4master.inception_v4 import create_model
 import os
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
-
+run_options = tf.RunOptions(report_tensor_allocations_upon_oom = True)
 #with device('/gpu:0'):
 
 parent_dir =os.path.join( os.getcwd(), '../asl-alphabet/asl_alphabet_train/')
@@ -75,12 +76,12 @@ validation_generator = test_datagen.flow_from_directory(
 # print(classifier.summary())
 
 classifier.fit_generator(train_generator,
-        steps_per_epoch=2000, max_q_size=3, 
+        steps_per_epoch=2000,
         epochs=5,
         validation_data=validation_generator,
         validation_steps=800)
 
-classifier.save_weights('first_try.h5')
+classifier.save_weights('resnet_weights.h5')
     # layers.Input(name='the_input', shape=(200,200), dtype='float32')
     # labels = layers.Input(name='the_labels',
     #                    shape=[img_gen.absolute_max_string_len], dtype='float32')
