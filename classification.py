@@ -8,6 +8,7 @@ from keras.models import Sequential
 from keras.layers import Conv2D, MaxPooling2D
 from keras.layers import Activation, Flatten, Dense, Dropout
 from keras import optimizers
+from resnet import ResNet
 import sys
 sys.path.insert(0, 'kerasinceptionV4master/inception_v4')
 from kerasinceptionV4master.inception_v4 import create_model
@@ -21,11 +22,14 @@ test_dir = parent_dir+"test"
 val_dir = parent_dir+"val"
 train_dir = parent_dir+"train"
 
-classifier = create_model(num_classes=29, dropout_prob=0.2, weights=None, include_top=True)#Sequential()
-for layer in classifier.layers[:9*len(classifier.layers)//10]:
-    layer.trainable = False
+# classifier = create_model(num_classes=29, dropout_prob=0.2, weights=None, include_top=True)#Sequential()
+# for layer in classifier.layers[:9*len(classifier.layers)//10]:
+#     layer.trainable = False
 
-print(len(classifier.layers))
+resnet = ResNet()
+classifier = resnet.build(299, 299, 3, 29, (3, 4, 6), filters=(64, 128, 256, 512))
+
+# print(len(classifier.layers))
 #
 # classifier.add(Conv2D(32, (5, 5), input_shape = (200, 200, 3), activation='relu'))
 # classifier.add(MaxPooling2D(pool_size=(2, 2)))
@@ -68,7 +72,7 @@ validation_generator = test_datagen.flow_from_directory(
         target_size=(299,299),
         batch_size=32,
         class_mode='categorical')
-print(classifier.summary())
+# print(classifier.summary())
 
 classifier.fit_generator(train_generator,
         steps_per_epoch=2000,
