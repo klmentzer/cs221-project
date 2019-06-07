@@ -25,10 +25,10 @@ train_dir = parent_dir+"train"
 # classifier = create_model(num_classes=29, dropout_prob=0.2, weights=None, include_top=True)#Sequential()
 # for layer in classifier.layers[:9*len(classifier.layers)//10]:
 #     layer.trainable = False
-
+print('yuhhhhhhh')
 resnet = ResNet()
 classifier = resnet.build(299, 299, 3, 29, (3, 4, 6), filters=(64, 128, 256, 512))
-
+print ('yeeeeet')
 # print(len(classifier.layers))
 #
 # classifier.add(Conv2D(32, (5, 5), input_shape = (200, 200, 3), activation='relu'))

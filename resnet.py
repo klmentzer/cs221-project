@@ -74,6 +74,7 @@ class ResNet():
         x = ZeroPadding2D((1, 1))(x)
         x = MaxPooling2D((3, 3), strides=(2, 2))(x)
         # loop over the number of stages
+
         for i in range(0, len(stages)):
             # initialize the stride, then apply a residual module
             # used to reduce the spatial size of the input volume
