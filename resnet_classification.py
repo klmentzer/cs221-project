@@ -84,7 +84,8 @@ def main():
                 steps_per_epoch=2000,
                 epochs=40,
                 validation_data=validation_generator,
-                validation_steps=800)
+                validation_steps=800,
+                use_multiprocessing=True)
 
         model.save_weights('resnet_weights.h5')
 
