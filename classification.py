@@ -12,9 +12,10 @@ import sys
 sys.path.insert(0, 'kerasinceptionV4master/inception_v4')
 from kerasinceptionV4master.inception_v4 import create_model
 import os
+import tensorflow
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
 
-with device('/gpu:0'):
+with tensorflow.device('/device:GPU:0'):
 
         parent_dir =os.path.join( os.getcwd(), '../asl-alphabet/asl_alphabet_train/')
         test_dir = parent_dir+"test"
