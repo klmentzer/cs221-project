@@ -56,7 +56,7 @@ def main():
         # model = Dense(29)(model)
         # model = Activation('softmax')(model)
         model.compile(loss='categorical_crossentropy',
-                    optimizer='rmsprop',
+                    optimizer='adam',
                     metrics=['accuracy'])
         print(model.summary())
         # create tool to input image data

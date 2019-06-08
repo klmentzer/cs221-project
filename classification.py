@@ -29,24 +29,24 @@ with tf.device('/device:GPU:0'):
         # print(len(classifier.layers))
         #
         classifier.add(Conv2D(32, (5, 5), input_shape = (299, 299, 3)))
-        classifier.add(BatchNormalization(axis=3))
+        # classifier.add(BatchNormalization(axis=3))
         classifier.add(Activation('relu'))
         classifier.add(MaxPooling2D(pool_size=(2, 2)))
         
         classifier.add(Conv2D(32, (3, 3), input_shape = (299, 299, 3)))
-        classifier.add(BatchNormalization(axis=3))
+        # classifier.add(BatchNormalization(axis=3))
         classifier.add(Activation('relu'))
         classifier.add(MaxPooling2D(pool_size=(2, 2)))
         
         classifier.add(Conv2D(64, (3, 3)))
-        classifier.add(BatchNormalization(axis=3))
+        # classifier.add(BatchNormalization(axis=3))
         classifier.add(Activation('relu'))
         classifier.add(MaxPooling2D(pool_size=(2, 2)))
         
         classifier.add(Flatten())
         classifier.add(Dense(64))
         classifier.add(Activation('relu'))
-        classifier.add(Dropout(0.7))
+        classifier.add(Dropout(0.5))
         classifier.add(Dense(29))
         classifier.add(Activation('softmax'))
 
