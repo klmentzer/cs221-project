@@ -17,6 +17,7 @@ import os
 def main():
     config = tf.ConfigProto(gpu_options=tf.GPUOptions(allow_growth=True))
     sess = tf.Session(config=config)
+    os.environ['CUDA_VISIBLE_DEVICES'] = '0'
     with tf.device('/device:GPU:0'):
         INPUT_SHAPE = (299, 299, 3)
         NUM_CLASSES = 29
