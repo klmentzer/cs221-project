@@ -15,6 +15,9 @@ import os
 
 
 def main():
+    config = tf.ConfigProto()
+    config.gpu_options.allow_growth = True
+    sess = tf.Session(config=config)
     INPUT_SHAPE = (299, 299, 3)
     NUM_CLASSES = 29
 
