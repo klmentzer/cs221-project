@@ -1,7 +1,7 @@
 # import the necessary packages
 from tensorflow.keras.layers import Input, Add, Dense, Activation, ZeroPadding2D
 from tensorflow.keras.layers import BatchNormalization,Flatten, Conv2D, AveragePooling2D, MaxPooling2D
-from tensorflow.keras.layers.core import Activation
+from tensorflow.python.keras.layers.core import Activation
 from tensorflow.keras.layers.core import Dense
 from tensorflow.keras.layers import Flatten, Add
 from tensorflow.keras.layers import Input
