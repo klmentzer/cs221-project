@@ -5,7 +5,7 @@ First stab at loading data into Keras
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.models import Sequential
 # from keras import layers
-from tensorflow.keras.layers import Conv2D, MaxPooling2D
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, BatchNormalization
 from tensorflow.keras.layers import Activation, Flatten, Dense, Dropout
 from tensorflow.keras import optimizers
 import sys
@@ -28,19 +28,25 @@ with tf.device('/device:GPU:0'):
 
         # print(len(classifier.layers))
         #
-        classifier.add(Conv2D(32, (5, 5), input_shape = (299, 299, 3), activation='relu'))
+        classifier.add(Conv2D(32, (5, 5), input_shape = (299, 299, 3)))
+        classifier.add(BatchNormalization(axis=3))
+        classifier.add(Activation('relu'))
         classifier.add(MaxPooling2D(pool_size=(2, 2)))
         
-        classifier.add(Conv2D(32, (3, 3), input_shape = (299, 299, 3), activation='relu'))
+        classifier.add(Conv2D(32, (3, 3), input_shape = (299, 299, 3)))
+        classifier.add(BatchNormalization(axis=3))
+        classifier.add(Activation('relu'))
         classifier.add(MaxPooling2D(pool_size=(2, 2)))
         
-        classifier.add(Conv2D(64, (3, 3), activation='relu'))
+        classifier.add(Conv2D(64, (3, 3)))
+        classifier.add(BatchNormalization(axis=3))
+        classifier.add(Activation('relu'))
         classifier.add(MaxPooling2D(pool_size=(2, 2)))
         
         classifier.add(Flatten())
         classifier.add(Dense(64))
         classifier.add(Activation('relu'))
-        classifier.add(Dropout(0.5))
+        classifier.add(Dropout(0.7))
         classifier.add(Dense(29))
         classifier.add(Activation('softmax'))
 
