@@ -2,11 +2,11 @@
 First stab at loading data into Keras
 '''
 
-from keras.preprocessing import image
-from keras.models import Sequential
-from keras.layers import Conv2D, MaxPooling2D
-from keras.layers import Activation, Flatten, Dense, Dropout
-from keras import optimizers
+from tensorflow.keras.preprocessing import image
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Conv2D, MaxPooling2D
+from tensorflow.keras.layers import Activation, Flatten, Dense, Dropout
+from tensorflow.keras import optimizers
 from resnet import ResNet50
 import tensorflow as tf
 import sys
