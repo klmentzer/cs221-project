@@ -58,6 +58,7 @@ def main():
         model.compile(loss='categorical_crossentropy',
                     optimizer='rmsprop',
                     metrics=['accuracy'])
+        print(model.summary())
         # create tool to input image data
         train_datagen = image.ImageDataGenerator(
                 rescale=1./255,
@@ -82,7 +83,7 @@ def main():
 
         model.fit_generator(train_generator,
                 steps_per_epoch=2000,
-                epochs=40,
+                epochs=5,
                 validation_data=validation_generator,
                 validation_steps=800,
                 use_multiprocessing=True)
