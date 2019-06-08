@@ -47,19 +47,19 @@ def main():
         train_generator = train_datagen.flow_from_directory(
                 train_dir,
                 target_size=(299,299),
-                batch_size=1,
+                batch_size=32,
                 class_mode="categorical")
 
         validation_generator = test_datagen.flow_from_directory(
                 val_dir,
                 target_size=(299,299),
-                batch_size=1,
+                batch_size=32,
                 class_mode='categorical')
 
 
         model.fit_generator(train_generator,
                 steps_per_epoch=2000,
-                epochs=5,
+                epochs=40,
                 validation_data=validation_generator,
                 validation_steps=800)
 
