@@ -15,8 +15,6 @@ import os
 
 
 def main():
-    config = tf.ConfigProto(gpu_options=tf.GPUOptions(allow_growth=True))
-    sess = tf.Session(config=config)
     INPUT_SHAPE = (299, 299, 3)
     NUM_CLASSES = 29
 
@@ -64,4 +62,7 @@ def main():
     model.save_weights('resnet_weights.h5')
 
 if __name__ == '__main__':
-    main()
+    config = tf.ConfigProto(gpu_options=tf.GPUOptions(allow_growth=True))
+    sess = tf.Session(config=config)
+    with tf.device('/device:GPU:0'):
+        main()
