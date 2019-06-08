@@ -8,10 +8,10 @@ from tensorflow.keras.layers import Conv2D, MaxPooling2D, GlobalAveragePooling2D
 from tensorflow.keras.layers import Activation, Flatten, Dense, Dropout
 from tensorflow.keras import optimizers
 from tensorflow.keras.models import Model
-from resnet import ResNet50
+# from resnet import ResNet50
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
-# from tensorflow.keras.applications.resnet50 import ResNet50
+from tensorflow.keras.applications.resnet50 import ResNet50
 from tensorflow.keras.applications.resnet50 import preprocess_input, decode_predictions
 import tensorflow as tf
 import sys
@@ -31,18 +31,15 @@ def main():
         val_dir = parent_dir + "val"
         train_dir = parent_dir + "train"
 
-        resnet = ResNet50(classes=NUM_CLASSES, input_shape=INPUT_SHAPE)
-        model = resnet.build()
-        # base_model = ResNet50(include_top=False, weights='imagenet', input_tensor=None, input_shape=(200, 200, 3), pooling=None, classes=1000)
+        # resnet = ResNet50(classes=NUM_CLASSES, input_shape=INPUT_SHAPE)
+        # model = resnet.build()
+        base_model = ResNet50(include_top=False, weights='imagenet', input_tensor=None, input_shape=(200, 200, 3), pooling=None, classes=1000)
 
-        # x = base_model.output
-        # x = GlobalAveragePooling2D()(x)
-        # x = Dropout(0.7)(x)
-        # predictions = Dense(NUM_CLASSES, activation= 'softmax')(x)
-        # model = Model(inputs = base_model.input, outputs = predictions)
-
-
-
+        x = base_model.output
+        x = GlobalAveragePooling2D()(x)
+        x = Dropout(0.7)(x)
+        predictions = Dense(NUM_CLASSES, activation= 'softmax')(x)
+        model = Model(inputs = base_model.input, outputs = predictions)
         # model = Conv2D(32, (5, 5), input_shape = (299, 299, 3), activation='relu')(model)
         # model = MaxPooling2D(pool_size=(2, 2))(model)
         
@@ -58,7 +55,6 @@ def main():
         # model = Dropout(0.5)(model)
         # model = Dense(29)(model)
         # model = Activation('softmax')(model)
-        print ('yayeet')
         model.compile(loss='categorical_crossentropy',
                     optimizer='rmsprop',
                     metrics=['accuracy'])
@@ -73,13 +69,13 @@ def main():
 
         train_generator = train_datagen.flow_from_directory(
                 train_dir,
-                target_size=(299,299),
+                target_size=(200,200),
                 batch_size=32,
                 class_mode="categorical")
 
         validation_generator = test_datagen.flow_from_directory(
                 val_dir,
-                target_size=(299,299),
+                target_size=(200,200),
                 batch_size=32,
                 class_mode='categorical')
 
@@ -88,7 +84,7 @@ def main():
                 steps_per_epoch=2000,
                 epochs=40,
                 validation_data=validation_generator,
-                validation_steps=800, verbose=2)
+                validation_steps=800)
 
         model.save_weights('resnet_weights.h5')
 
