@@ -10,6 +10,7 @@ from keras.layers import Activation, Flatten, Dense, Dropout
 from keras import optimizers
 from segment_data import get_category_from_filename
 from glob import glob
+from sklearn.metrics import classification_report
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
 
 classifier = Sequential()
@@ -51,58 +52,61 @@ temp = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4, 'F': 5, 'G': 6, 'H': 7, \
     'Y': 24, 'Z': 25, 'del': 26, 'nothing': 27, 'space': 28}
 label_dict = {value: key for key, value in temp.items()}
 
-for letter in letter_folders:
-        print(letter)
-        lett_dir = os.path.join( os.getcwd(), '../asl-alphabet/asl_alphabet_train/val',letter)
-        print(lett_dir)
-        test_datagen = image.ImageDataGenerator(rescale=1./255)
-
-        test_generator = test_datagen.flow_from_directory(
-                lett_dir,
-                target_size=(200,200),
-                batch_size=32,
-                class_mode='categorical')
-        results = classifier.evaluate_generator(generator=test_generator, steps=300,verbose=1)
-        print(classifier.metrics_names)
-        print(results)
-
-#
-# for k in range(1):
-#     j=0
-#     for letter in letter_folders:
+# for letter in letter_folders:
 #         print(letter)
-#         num = np.random.choice(range(301,601))
-#         filename = os.path.join( os.getcwd(), '../asl-alphabet/asl_alphabet_train/val',letter,str(letter)+str(num)+'.jpg')
-#         img = cv2.imread(filename)
-#         img = img.reshape(-1,200, 200, 3)
-#         preds = classifier.predict(img)
-#         print(preds)
-#         preds2 = classifier.predict_classes(img)
-#         print(label_dict[preds2[0]])
+#         lett_dir = os.path.join( os.getcwd(), '../asl-alphabet/asl_alphabet_train/val',letter)
+#         print(lett_dir)
+#         test_datagen = image.ImageDataGenerator(rescale=1./255)
 #
-#         parent_dir =os.path.join( os.getcwd(), '../asl-alphabet/asl_alphabet_train/val',letter,'*')
-#         letter_imgs = glob(parent_dir)
-#         for i in range(len(letter_imgs)):
-#             img = cv2.imread(letter_imgs[i])
-#             to_test[i,:,:,:] = img
-#
-#         expected = np.tile(preds,300)
-#         expected = expected.reshape((300,29))
-#         # expected = np.zeros((300,29))
-#         # expected[:,5] = np.ones(300)
-#         preds = classifier.evaluate(to_test,expected)
-#         print(preds)
+#         test_generator = test_datagen.flow_from_directory(
+#                 lett_dir,
+#                 target_size=(200,200),
+#                 batch_size=32,
+#                 class_mode='categorical')
+#         results = classifier.evaluate_generator(generator=test_generator, steps=300,verbose=1)
 #         print(classifier.metrics_names)
-#         #acc_dict[letter] = preds[1]
-#         if k == 0:
-#             results.append([letter,preds[1]])
-#         else:
-#             results[j].append(preds[1])
-#         j +=1
+#         print(results)
+
+
+for k in range(1):
+    j=0
+    for letter in letter_folders:
+        print(letter)
+        num = np.random.choice(range(301,601))
+        filename = os.path.join( os.getcwd(), '../asl-alphabet/asl_alphabet_train/val',letter,str(letter)+str(num)+'.jpg')
+        img = cv2.imread(filename)
+        img = img.reshape(-1,200, 200, 3)
+        preds = classifier.predict(img)
+        print(preds)
+        preds2 = classifier.predict_classes(img)
+        print(label_dict[preds2[0]])
+
+        parent_dir =os.path.join( os.getcwd(), '../asl-alphabet/asl_alphabet_train/val',letter,'*')
+        letter_imgs = glob(parent_dir)
+        for i in range(len(letter_imgs)):
+            img = cv2.imread(letter_imgs[i])
+            to_test[i,:,:,:] = img
+
+        expected = np.tile(preds,300)
+        expected = expected.reshape((300,29))
+        # expected = np.zeros((300,29))
+        # expected[:,5] = np.ones(300)
+        eval = classifier.predict_classes(to_test)
+        #eval =np.argmax(eval, axis=1)
+        print(classification_report(eval,expected))
+        preds = classifier.evaluate(to_test,expected)
+        print(preds)
+        print(classifier.metrics_names)
+        #acc_dict[letter] = preds[1]
+        if k == 0:
+            results.append([letter,preds[1]])
+        else:
+            results[j].append(preds[1])
+        j +=1
 #
 # print(acc_dict)
-# for result in results:
-#     print(result)
+for result in results:
+    print(result)
 #
 # results = [['A', 0.8633333341280619, 0.8633333341280619, 0.8633333341280619],
 # ['B', 0.39, 0.39, 0.27],
