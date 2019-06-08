@@ -1,15 +1,16 @@
 # import the necessary packages
-from tensorflow.keras.layers.normalization import BatchNormalization
-from tensorflow.keras.layers import Input, Add, Dense, Activation, ZeroPadding2D
-from tensorflow.keras.layers import BatchNormalization,Flatten, Conv2D, AveragePooling2D, MaxPooling2D
-from tensorflow.keras.layers.core import Activation
-from tensorflow.keras.layers.core import Dense
-from tensorflow.keras.layers import Flatten, Add
-from tensorflow.keras.layers import Input
-from tensorflow.keras.models import Model
-from tensorflow.keras.layers import add
-from tensorflow.keras.regularizers import l2
-from tensorflow.keras import backend as K
+import tensorflow as tf
+from tf.keras.layers.normalization import BatchNormalization
+from tf.keras.layers import Input, Add, Dense, Activation, ZeroPadding2D
+from tf.keras.layers import BatchNormalization,Flatten, Conv2D, AveragePooling2D, MaxPooling2D
+from tf.keras.layers.core import Activation
+from tf.keras.layers.core import Dense
+from tf.keras.layers import Flatten, Add
+from tf.keras.layers import Input
+from tf.keras.models import Model
+from tf.keras.layers import add
+from tf.keras.regularizers import l2
+from tf.keras import backend as K
 
 class ResNet50():
     def __init__(self, classes, input_shape):

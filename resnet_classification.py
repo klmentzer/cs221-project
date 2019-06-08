@@ -1,14 +1,13 @@
 '''
 First stab at loading data into Keras
 '''
-
-from tensorflow.keras.preprocessing import image
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv2D, MaxPooling2D
-from tensorflow.keras.layers import Activation, Flatten, Dense, Dropout
-from tensorflow.keras import optimizers
-from resnet import ResNet50
 import tensorflow as tf
+from tf.keras.preprocessing import image
+from tf.keras.models import Sequential
+from tf.keras.layers import Conv2D, MaxPooling2D
+from tf.keras.layers import Activation, Flatten, Dense, Dropout
+from tf.keras import optimizers
+from resnet import ResNet50
 import sys
 from kerasinceptionV4master.inception_v4 import create_model
 import os
