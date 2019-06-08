@@ -58,7 +58,7 @@ def main():
         # model = Dropout(0.5)(model)
         # model = Dense(29)(model)
         # model = Activation('softmax')(model)
-        print 'yayeet'
+        print ('yayeet')
         model.compile(loss='categorical_crossentropy',
                     optimizer='rmsprop',
                     metrics=['accuracy'])
@@ -88,7 +88,7 @@ def main():
                 steps_per_epoch=2000,
                 epochs=40,
                 validation_data=validation_generator,
-                validation_steps=800)
+                validation_steps=800, verbose=2)
 
         model.save_weights('resnet_weights.h5')
 
