@@ -39,20 +39,20 @@ class ResNet50():
         # first layer of the block, uses f1 and kernel size of (1,1)
         data = Conv2D(filters=f1, strides=self.strides, kernel_size=(1,1),
                       input_shape=self.input_shape, padding='valid')(data)
-        data = BatchNormalization(axis=3)(data)
+        # data = BatchNormalization(axis=3)(data)
         data = Activation('relu')(data)
 
         # second layer, uses f2 and kernel size of (3, 3); padding = 'same' to keep output
         # dimensions the same as input
         data = Conv2D(filters=f2, strides=self.strides, kernel_size=(3,3),
                       input_shape=self.input_shape, padding='same')(data)
-        data = BatchNormalization(axis=3)(data)
+        # data = BatchNormalization(axis=3)(data)
         data = Activation('relu')(data)
 
         # third layer, uses f3 and kernel size of (1,1)
         data = Conv2D(filters=f3, strides=self.strides, kernel_size=(1,1),
                       input_shape=self.input_shape, padding='valid')(data)
-        data = BatchNormalization(axis=3)(data)
+        # data = BatchNormalization(axis=3)(data)
 
         # add shortcut to data then apply relu activation function
         data = Add()([data, shortcut])
@@ -77,25 +77,25 @@ class ResNet50():
         shortcut = data
         shortcut = Conv2D(filters=f3, strides=self.strides, kernel_size=(1,1),
                       input_shape=self.input_shape, padding='valid')(shortcut)
-        shortcut = BatchNormalization(axis=3)(shortcut)
+        # shortcut = BatchNormalization(axis=3)(shortcut)
 
         # first layer of the block, uses f1 and kernel size of (1,1)
         data = Conv2D(filters=f1, strides=self.strides, kernel_size=(1,1),
                       input_shape=self.input_shape, padding='valid')(data)
-        data = BatchNormalization(axis=3)(data)
+        # data = BatchNormalization(axis=3)(data)
         data = Activation('relu')(data)
 
         # second layer, uses f2 and kernel size of (3, 3); padding = 'same' to keep output
         # dimensions the same as input
         data = Conv2D(filters=f2, strides=self.strides, kernel_size=(3,3),
                       input_shape=self.input_shape, padding='same')(data)
-        data = BatchNormalization(axis=3)(data)
+        # data = BatchNormalization(axis=3)(data)
         data = Activation('relu')(data)
 
         # third layer, uses f3 and kernel size of (1,1)
         data = Conv2D(filters=f3, strides=self.strides, kernel_size=(1,1),
                       input_shape=self.input_shape, padding='valid')(data)
-        data = BatchNormalization(axis=3)(data)
+        # data = BatchNormalization(axis=3)(data)
 
         # add shortcut to data then apply relu activation function
         data = Add()([data, shortcut])
@@ -109,7 +109,7 @@ class ResNet50():
 
         # stage 1: create first layer, batch normalize, and apply activation
         x = Conv2D(64, (7,7), strides=(2,2), input_shape=self.input_shape)(x)
-        x = BatchNormalization(axis=3)(x)
+        # x = BatchNormalization(axis=3)(x)
         x = Activation('relu')(x)
         x = MaxPooling2D((3,3), strides=(2,2))(x)
 
