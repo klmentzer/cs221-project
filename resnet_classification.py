@@ -73,13 +73,13 @@ def main():
         train_generator = train_datagen.flow_from_directory(
                 train_dir,
                 target_size=(200,200),
-                batch_size=32,
+                batch_size=8,
                 class_mode="categorical")
 
         validation_generator = test_datagen.flow_from_directory(
                 val_dir,
                 target_size=(200,200),
-                batch_size=32,
+                batch_size=8,
                 class_mode='categorical')
 
 
@@ -87,7 +87,8 @@ def main():
                 steps_per_epoch=2000,
                 epochs=5,
                 validation_data=validation_generator,
-                validation_steps=800)
+                validation_steps=800,
+                max_queue_size=5)
 
         model.save_weights('resnet_weights.h5')
 
