@@ -6,7 +6,7 @@ from tensorflow.python.keras.layers.core import Dense
 from tensorflow.python.keras.layers import Flatten, Add
 from tensorflow.python.keras.layers import Input
 from tensorflow.python.keras.models import Model
-from tensorflow.python.keras.layers import add
+from tensorflow.python.keras.layers import add, Dropout
 from tensorflow.python.keras.regularizers import l2
 from tensorflow.python.keras import backend as K
 import tensorflow as tf
@@ -144,6 +144,7 @@ class ResNet50():
         x = AveragePooling2D((2,2))(x)
 
         x = Flatten()(x)
+        x = Dropout(0.7)(x)
         x = Dense(self.classes, activation='softmax')(x)
 
         model = Model(inputs=x_input, outputs=x)
