@@ -28,8 +28,8 @@ def main():
         # set directory names
         parent_dir =os.path.join( os.getcwd(), '../asl-alphabet/asl_alphabet_train/')
         test_dir = parent_dir + "test"
-        val_dir = parent_dir + "test"
-        train_dir = parent_dir + "val"
+        val_dir = parent_dir + "val"
+        train_dir = parent_dir + "train"
 
         # resnet = ResNet50(classes=NUM_CLASSES, input_shape=INPUT_SHAPE)
         # model = resnet.build()
@@ -86,7 +86,7 @@ def main():
                 epochs=5,
                 validation_data=validation_generator,
                 validation_steps=800,
-                use_multiprocessing=True)
+                workers=5)
 
         model.save_weights('resnet_weights.h5')
 
