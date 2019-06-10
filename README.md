@@ -1,2 +1,2 @@
 # cs221-project
-yuh 
+by Bihan Jiang, Madeline Liao, and Kaleigh Mentzer
